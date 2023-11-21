@@ -4,8 +4,8 @@ import math
 from scipy.ndimage import gaussian_filter
 import torch
 
-from src import util
-from src.model import bodypose_model
+from differentiable_torch_openpose import util
+from differentiable_torch_openpose.model import bodypose_model
 import torchvision.transforms.functional as F
 
 
