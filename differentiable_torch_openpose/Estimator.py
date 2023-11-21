@@ -9,7 +9,7 @@ from src.model import bodypose_model
 import torchvision.transforms.functional as F
 
 
-class Body(object):
+class Estimator(object):
     def __init__(self, model_path):
         self.model = bodypose_model()
         if torch.cuda.is_available():
@@ -288,9 +288,9 @@ if __name__ == "__main__":
     import cv2
 
     # sample code
-    body_model = Body(
-        './model/body_pose_model.pth')
-    test_image = '/home/okuyama/dev/differentiable-pytorch-openpose/images/demo.jpg'
+    body_model = Estimator(
+        'MODEL_PATH')
+    test_image = 'YOUR_TEST_IMAGE_PATH'
     oriImg = cv2.imread(test_image)  # BGR
     x_0 = torch.from_numpy(oriImg.astype(np.float32)).to('cuda:0')  # HWC
     heatmap_0 = body_model(x_0)
