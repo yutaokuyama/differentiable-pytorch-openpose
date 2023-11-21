@@ -20,7 +20,6 @@ class Body(object):
 
     def __call__(self, oriImg: torch.Tensor):
 
-        oriImg = oriImg.to('cuda:0')
         scale_search = 0.5
         boxsize = 368
         stride = 8
@@ -293,9 +292,6 @@ if __name__ == "__main__":
         './model/body_pose_model.pth')
     test_image = '/home/okuyama/dev/differentiable-pytorch-openpose/images/demo.jpg'
     oriImg = cv2.imread(test_image)  # BGR
-    x_0 = torch.from_numpy(oriImg.astype(np.float32))  # HWC
-
-    assert (x_0.max())
-    print(x_0.shape)
+    x_0 = torch.from_numpy(oriImg.astype(np.float32)).to('cuda:0')  # HWC
     heatmap_0 = body_model(x_0)
     body_model.debug_heatmap(heatmap_0, x_0)
